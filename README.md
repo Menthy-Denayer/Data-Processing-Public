@@ -9,6 +9,12 @@ The code is divided into 2 subfolders:
 
 We recommend using the main files as an example to using the code.
 
+# External Libraries
+
+- [OpenSim](https://github.com/opensim-org/opensim-core)
+- [ezc3d toolbox](https://github.com/pyomeca/ezc3d)
+- [Matlab Robotics System Toolbox](https://nl.mathworks.com/products/robotics.html)
+
 # Citation
 The dataset linked to this repository can be found [here](to add).
 

@@ -4,6 +4,7 @@ close all
 
 %% Add Path
 addpath("opensim-tools");
+addpath("opensim-tools\utilities");
 addpath("data-processing\utilities");
 
 %% Define Variables

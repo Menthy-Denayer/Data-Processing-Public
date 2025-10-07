@@ -14,8 +14,11 @@ dirInfo = struct2table(dir(c3dDir));
 c3dFiles = string(dirInfo.name(ismember(fileExtensions, ".c3d")));
 Nfiles = length(c3dFiles);  
 
+%% Choose EMG Flags
+emgFlagsPath = uigetfile(".mat", "Choose EMG flags file");
+
 %% Define General Settings
-results_directory = "temp";      
+results_directory = "SUBJ1";      
 settings.mot_results_dir = results_directory;
 settings.trc_results_dir = results_directory;
 settings.sto_results_dir = results_directory;
@@ -64,7 +67,7 @@ settings.mvc_results_dir = results_directory;
 %% Create EMG Flag Structure
 % removing erroneous EMG data based on previous processing
 % load flags structure
-load("EMGflags-vOct2025.mat");
+load(emgFlagsPath);
 flags = flags.SUBJ1;
 
 if(~isempty(flags))

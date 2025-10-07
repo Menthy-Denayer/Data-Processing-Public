@@ -22,6 +22,9 @@ analyze_xml_file = settings.analyze_xml_file;
 model_file = settings.scaled_model_path;
 ik_mot_file = settings.ik_mot_file;
 analyze_dir = settings.analyze_dir;
+if(~exist(analyze_dir,"dir"))
+    mkdir(analyze_dir)
+end
 
 %% Changes on the generic .xml file
 OpenSimModel= Model(model_file);

@@ -57,11 +57,11 @@ import org.opensim.modeling.*
 trc_file = '';
 mot_file = '';
 
-% try
-%     [trc_file, mot_file] = exportC3D(settings);
-% catch ME
-%     warning(ME.identifier, 'Failed to extract marker & force data: %s', ME.message);
-% end
+try
+    [trc_file, mot_file] = exportC3D(settings);
+catch ME
+    warning(ME.identifier, 'Failed to extract marker & force data: %s', ME.message);
+end
 
 %% Extract and Save EMG Data
 % uses the ezc3d library

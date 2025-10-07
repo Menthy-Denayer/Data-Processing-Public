@@ -18,6 +18,9 @@ import org.opensim.modeling.*
 
 %% Define Settings
 outputDir = settings.output_dir;
+if(~exist(outputDir,"dir"))
+    mkdir(outputDir)
+end
 
 if(~isfield(settings, "printSettings"))
     settings.printSettings = false;

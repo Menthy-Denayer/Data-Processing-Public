@@ -16,7 +16,9 @@ import org.opensim.modeling.*
 
 %% Define Settings
 outputDir = settings.ik_mot_dir;
-[~,trcFileName,~] = fileparts(settings.trc_file);                           % extract marker data name
+if(~exist(outputDir,"dir"))
+    mkdir(outputDir)
+end
 
 if(~isfield(settings,"reportMarkerLocations"))
     settings.reportMarkerLocations = false;
@@ -29,6 +31,9 @@ end
 if(~isfield(settings,"printSettings"))
     settings.printSettings = false;
 end
+
+% retrieve base file name
+[~,trcFileName,~] = fileparts(settings.trc_file);                           % extract marker data name
 
 %% Load OpenSim Model
 % Load model file

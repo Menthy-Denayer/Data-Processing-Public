@@ -400,10 +400,6 @@ expName = expName(:,1);
 fileType = "png";
 
 %% Kinematics Plot
-threshold = 5;      
-minFrames = 5;
-isDiffKin = abs(meanKinNormalWalking - meanKinWeightedWalking5kg) > threshold;
-eventDiffKin = isDiffKin(2:end,:) - isDiffKin(1:end-1,:);
 
 % time series figure
 for i = 1:NkinCol                                                   
@@ -416,21 +412,6 @@ for i = 1:NkinCol
     plot_mean_std(resampTime, meanKinWeightedWalking3kg(:,i), stdKinWeightedWalking3kg(:,i), [0.50,0,0])
     plot_mean_std(resampTime, meanKinWeightedWalking4kg(:,i), stdKinWeightedWalking3kg(:,i), [0.75,0,0])
     plot_mean_std(resampTime, meanKinWeightedWalking5kg(:,i), stdKinWeightedWalking5kg(:,i), [1,0,0])
-
-    if(i == KneeRightIdx)
-        start_norm = coordinatesToFigureLoc(ax, [0.35, maxKneeFlexionRightNormalWalking]);
-        end_norm = coordinatesToFigureLoc(ax, [0.35, maxKneeFlexionRightWeightedWalking5kg]);
-        annotation('arrow', [start_norm(1) end_norm(1)], [start_norm(2) end_norm(2)]);
-        dp = maxKneeFlexionRightNormalWalking - maxKneeFlexionRightWeightedWalking5kg;
-        text(0.42, maxKneeFlexionRightNormalWalking-dp/2,0, "-" + round(dp,2) + "°", "HorizontalAlignment", "center", "VerticalAlignment","middle")
-    elseif(i == KneeLeftIdx)
-        start_norm = coordinatesToFigureLoc(ax, [0.6, maxKneeFlexionLeftNormalWalking]);
-        end_norm = coordinatesToFigureLoc(ax, [0.6, maxKneeFlexionLeftWeightedWalking5kg]);
-        annotation('arrow', [start_norm(1) end_norm(1)], [start_norm(2) end_norm(2)]);
-        dp = maxKneeFlexionLeftNormalWalking - maxKneeFlexionLeftWeightedWalking5kg;
-        text(0.55, maxKneeFlexionLeftNormalWalking-dp/2, 0, "-" + round(dp,2) + "°", "HorizontalAlignment", "center", "VerticalAlignment","middle")
-    end
-
     xlabel("Gait Cycle [%]")
     ylabel("Joint Angle [°]")
     legend(["" "Normal" "" "Weighted 1kg" "" "Weighted 2kg" "" "Weighted 3kg" "" "Weighted 4kg" "" "Weighted 5kg"], 'Location', 'best')

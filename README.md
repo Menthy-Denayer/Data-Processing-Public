@@ -4,10 +4,11 @@ This repository contains MATLAB code to process C3D files, containing 3D marker 
 The code has been developed to process the dataset, linked below. However, it can also be used to process other C3D files. Some minor tweaks might be required to run the OpenSim pipeline. Scaling OpenSim models has to be performed manually, i.e. is not included in the pipeline.
 
 # Structure
-The code is divided into 2 subfolders:
+The code is divided into 3 subfolders:
 
 - **data-processing** contains code to read and process the raw C3D files.
 - **opensim-tools** contains code to run the OpenSim pipelines (IK, ID, analyze) automatically, for a given set of settings.
+- **model-creation** contains codes to generate the weighted OpenSim models, representing subjects with added mass around the shank (see dataset/paper for more information).
 
 We recommend using the main files as an example to using the code:
 

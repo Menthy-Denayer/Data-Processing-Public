@@ -2,16 +2,37 @@ clear all
 clc
 close all
 
+%% ----------------------------- Description ------------------------------
+% This code runs the standard OpenSim pipeline (IK, ID, ANALYSIS), based on
+% user-selected settings (default xml files).
+
+% The user must select the following files and directories:
+%   o scaled OpenSim model (.osim)
+%   o directory of OpenSim models with added weights (.osim)
+%   o directory of processed marker data (.trc)
+%   o directory of processed ground reaction force data (.grf)
+%   o gait events structure, containing heel strike times (.mat)
+
+% The user must also select the following (default) setting files:
+%   o IK settings file, with marker weights (.xml)
+%   o ID settings file (.xml)
+%   o external loads settings file to assign GRFs to the right foot (.xml)
+%   o analysis settings file, for computing joint kinematics (.xml)
+%   o analysis settings file, for computing calcn body kinematics (.xml)
+
+%% ---------------------------- User Settings -----------------------------
+% Choose pipelines to run
+runIKcode = true;
+runIDcode = true;                                                           % requires IK results
+runPowercode = true;                                                        % requires IK/ID results
+runBKcode = true;                                                           % requires IK results
+
+%% ------------------------------------------------------------------------
+
 %% Add Path
 addpath("opensim-tools");
 addpath("opensim-tools\utilities");
 addpath("data-processing\utilities");
-
-%% Define Variables
-runIKcode = true;
-runIDcode = true;
-runPowercode = true;
-runBKcode = true;
 
 %% Load OpenSim Model
 % Load model file

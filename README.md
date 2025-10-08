@@ -1,7 +1,7 @@
 # Data-Processing-Public
 This repository contains MATLAB code to process C3D files, containing 3D marker locations, 3D ground reaction forces and EMG muscle activations, and export them to commonly used file formats in the musculoskeletal software [OpenSim](https://simtk.org/frs/index.php?group_id=91).
 
-The code has been developed to process the dataset, linked below. However, it can also be used to process other C3D files.
+The code has been developed to process the dataset, linked below. However, it can also be used to process other C3D files. Some minor tweaks might be required to run the OpenSim pipeline. Scaling OpenSim models has to be performed manually, i.e. is not included in the pipeline.
 
 # Structure
 The code is divided into 2 subfolders:
@@ -25,7 +25,7 @@ To run the code, you need to install the libraries and toolboxes below. You can 
 - [Matlab Robotics System Toolbox](https://nl.mathworks.com/products/robotics.html)
 
 # Citation
-The dataset linked to this repository can be found [here](to add).
+The dataset linked to this repository can be found [here](soon).
 
 If you use this repository, please cite the following paper: (currently submitted in Nature Data):
 

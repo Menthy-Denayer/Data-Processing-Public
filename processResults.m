@@ -2,6 +2,30 @@ clear all
 clc
 close all
 
+%% ----------------------------- Description ------------------------------
+% This code combines the processed data from "processData" and the OpenSim
+% processing pipeline, and combines the results into a MATLAB structure
+% with data resampled to the same time vector. 
+
+% The user needs to select the following data directories and files:
+%   o gait events structure (.mat)
+%   o directory with IK results (.mot)
+%   o directory with ID results (.mot)
+%   o directory with ANALYSIS results (joint powers, .sto)
+%   o directory with ANALYSIS results (calcn body kinematics, .sto)   
+%   o directory with processed EMG data (.sto)
+%   o directory with processed GRF data (.mot)
+
+%% ---------------------------- User Settings -----------------------------
+% define time 
+resampTime = 0:0.01:1;
+Ndata = length(resampTime);
+
+% save figures
+exportFigure = false;
+
+%% ------------------------------------------------------------------------
+
 %% Add Path
 % general data processing
 addpath("data-processing\utilities") 
@@ -11,13 +35,6 @@ desGRFColumns = ["time", "ground_force_r_vx", "ground_force_r_vy", "ground_force
 desEMGColumns = ["Biceps Femoris" "Semitendinosus" "Rectus Femoris" "Vastus Lateralis" "Vastus Medialis" "Gastrocnemius Medialis" "Gastrocnemius Lateralis" "Soleus"];
 desEMGColumns = ["time", desEMGColumns + " Right", desEMGColumns + " Left"];
 desEMGColumns = replace(desEMGColumns," ", "_");
-
-% define time 
-resampTime = 0:0.01:1;
-Ndata = length(resampTime);
-
-% save figures
-exportFigure = false;
 
 %% Load Events File
 % File containing heel strike events for both legs

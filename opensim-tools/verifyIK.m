@@ -20,12 +20,12 @@ NIKfiles = length(stoFiles);
 [Normal, Weighted1kg, Weighted2kg, Weighted3kg, Weighted4kg, Weighted5kg] = splitData(stoFiles);
 
 %% Plot Errors
-% readPlot(gaitEvents.events, Normal, ikDIR, ["marker_error_RMS" "marker_error_max"], "SUBJ09_", "_markers_ik_marker_errors.sto")
-% readPlot(gaitEvents.events, Weighted1kg, ikDIR, ["marker_error_RMS" "marker_error_max"], "SUBJ09_", "_markers_ik_marker_errors.sto")
-% readPlot(gaitEvents.events, Weighted2kg, ikDIR, ["marker_error_RMS" "marker_error_max"], "SUBJ09_", "_markers_ik_marker_errors.sto")
-% readPlot(gaitEvents.events, Weighted3kg, ikDIR, ["marker_error_RMS" "marker_error_max"], "SUBJ09_", "_markers_ik_marker_errors.sto")
-readPlot(gaitEvents.events, Weighted4kg, ikDIR, ["marker_error_RMS" "marker_error_max"], "SUBJ09_", "_markers_ik_marker_errors.sto")
-% readPlot(gaitEvents.events, Weighted5kg, ikDIR, ["marker_error_RMS" "marker_error_max"], "SUBJ09_", "_markers_ik_marker_errors.sto")
+readPlot(gaitEvents.events, Normal, ikDIR, ["marker_error_RMS" "marker_error_max"], "SUBJ01_", "_markers_ik_marker_errors.sto")
+% readPlot(gaitEvents.events, Weighted1kg, ikDIR, ["marker_error_RMS" "marker_error_max"], "SUBJ01_", "_markers_ik_marker_errors.sto")
+% readPlot(gaitEvents.events, Weighted2kg, ikDIR, ["marker_error_RMS" "marker_error_max"], "SUBJ01_", "_markers_ik_marker_errors.sto")
+% readPlot(gaitEvents.events, Weighted3kg, ikDIR, ["marker_error_RMS" "marker_error_max"], "SUBJ01_", "_markers_ik_marker_errors.sto")
+% readPlot(gaitEvents.events, Weighted4kg, ikDIR, ["marker_error_RMS" "marker_error_max"], "SUBJ01_", "_markers_ik_marker_errors.sto")
+% readPlot(gaitEvents.events, Weighted5kg, ikDIR, ["marker_error_RMS" "marker_error_max"], "SUBJ01_", "_markers_ik_marker_errors.sto")
 
 %% Helper Function
 % Function to split the file names into categories for easier comparison

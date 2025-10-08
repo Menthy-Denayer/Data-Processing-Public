@@ -2,10 +2,26 @@ clear all
 clc
 close all
 
+%% ----------------------------- Description ------------------------------
+% This code reads the raw C3D files, and extracts and processes the marker,
+% ground reaction forces, and EMG data. It also performs MVC scaling,
+% scaling of the last force plate to correct for the experimental offset,
+% and extracts gait events.
+
+% The user needs to select the following data directories and files:
+%   o directory of the "ezc3d" library
+%   o directory containing the C3D files (.c3d)
+%   o EMG flags structure, containing files with bad EMG signals (.mat)
+
+%% ------------------------------------------------------------------------
+
+%% Find EZC3D Directory
+ezc3dDIR = uigetdir("","Choose ezc3d directory");
+
 %% Add Path to Repository
 addpath("data-processing");
 addpath("data-processing\utilities");
-addpath("C:\Users\medenaye\Documents\programs\ezc3d_matlab")
+addpath(ezc3dDIR)
 
 %% Choose C3D Directory
 c3dDir = uigetdir("","Choose directory with .c3d files to process");
@@ -81,7 +97,7 @@ if(~isempty(flags))
     settings.emg_remove_flags = flags;
 end
 
-settings.mvc_directory = "temp/MVCprocessed.mat";
+settings.mvc_directory = "SUBJ1/MVCprocessed.mat";
 
 %% Check Static Trial
 staticTrials = c3dFiles(contains(c3dFiles,"static","IgnoreCase",true));

@@ -25,7 +25,7 @@ To run the code, you need to install the libraries and toolboxes below. You can 
 - [Matlab Robotics System Toolbox](https://nl.mathworks.com/products/robotics.html)
 
 # Citation
-The dataset linked to this repository can be found [here](soon).
+The dataset linked to this repository can be found [here](coming soon).
 
 If you use this repository, please cite the following paper: (currently submitted in Nature Data):
 

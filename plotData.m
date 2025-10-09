@@ -13,13 +13,13 @@ close all
 subjID = 1;                                                                 % choose one subject to plot
 
 % Choose Plot
-plotAll = false;                                                             % plot all subjects together
+plotAll = true;                                                             % plot all subjects together
 plotIK = false;                                                             % plot the IK results
 plotID = false;                                                             % plot the ID results
 plotGRF = false;                                                            % plot the processed GRFs
 plotEMG = false;                                                            % plot the processed EMG signals
 plotPOW = false;                                                            % plot the computed joint powers
-plotSpeed = true;                                                          % plot the speed
+plotSpeed = false;                                                          % plot the speed
 
 % Export figures
 exportFigure = false;                                                       % save the figures

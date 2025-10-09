@@ -1,4 +1,26 @@
 function corrFactor = computeGRFcorrection(settings)
+%% computeGRFcorrection - Computes a correction factor based on a static trial
+% - assumes the vertical forces should add up to be m*g in total
+%
+%------------------------------------------------------------- INPUTS -------------------------------------------------------------
+% settings                              | struct                | Configuration structure with fields:
+%   settings.grf_static_trial           | string                | Path to the static trial C3D file
+%
+%------------------------------------------------------------- OUTPUTS ------------------------------------------------------------
+% corrFactor                            | double                | Correction factor for the force data
+%
+%----------------------------------------------------------- REQUIREMENTS ---------------------------------------------------------
+% OpenSim MATLAB API (osimC3D)          | https://github.com/opensim-org/opensim-core/blob/main/Bindings/Java/Matlab/Utilities/osimC3D.m
+%
+%------------------------------------------------------------- TO DO's ------------------------------------------------------------
+%
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% Original Author: Menthy Denayer
+% Date: 09/Oct/2025
+
+% Last Update: Menthy Denayer
+% Date: 09/Oct/2025 : updated info
 
 %% Import OpenSim Libraries
 import org.opensim.modeling.*

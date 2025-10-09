@@ -12,9 +12,9 @@ The code is divided into 3 subfolders:
 
 We recommend using the main files as an example to using the code:
 
-- **processData.m** allows you to process the raw C3D files, and extract the (processed) marker, ground reaction forces and EMG data.
-- **runOpenSim.m** runs the OpenSim pipeline, including IK, ID, and the analysis tool to compute joint powers.
-- **processResults.m** combines the processed data, and OpenSim results, into a MAT structure, with gait-averaged, synchronized data.
+- **processData.m** allows you to process the raw C3D files, and extract the (processed) marker, ground reaction forces and EMG data. We recommend creating a folder, containing all of the C3D files, for one subject, and selecting this folder when processing the data. In this way, all the trials are used when computing the MVC scaling.
+- **runOpenSim.m** runs the OpenSim pipeline, including IK, ID, and the analysis tool to compute joint powers. The code assumes the input files are sorted in the same order (e.g. trial 1 for markers, GRF etc., then trial 2 ...).
+- **processResults.m** combines the processed data, and OpenSim results, into a MAT structure, with gait-averaged, synchronized data. As the code assumes the files are sorted in the same order for the different variables (GRF, markers, EMG etc.), make sure that files, created from the static & MVC trials are removed from the directory.
 
 You can also visualize the processed data, inside the MAT structure, using the **plotData.m** code.
 

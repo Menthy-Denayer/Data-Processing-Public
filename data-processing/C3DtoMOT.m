@@ -22,10 +22,6 @@ function [mot_file, forceTableProcessed] = C3DtoMOT(settings, OpenSimC3D)
 %----------------------------------------------------------- REQUIREMENTS ---------------------------------------------------------
 % OpenSim MATLAB API (osimC3D)          | https://github.com/opensim-org/opensim-core/blob/main/Bindings/Java/Matlab/Utilities/osimC3D.m
 %
-%------------------------------------------------------------- TO DO's ------------------------------------------------------------
-% - improve force saving in left/right to be more general
-% - fix filtering to stop shifts of +20N
-%
 %----------------------------------------------------------------------------------------------------------------------------------
 
 % Original Author: Couëdel Romane

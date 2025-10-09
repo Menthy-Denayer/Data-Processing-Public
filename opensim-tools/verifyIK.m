@@ -2,6 +2,21 @@ clear all
 clc
 close all
 
+%% ----------------------------- Description ------------------------------
+% This code allows to visualize the IK errors to verify that they are
+% within the bounds defined by OpenSim.
+
+% The data is coloured based on these guidelines. Ideally, the curves
+% should be black, or yellow. Orange and red parts indicate errors that are
+% substantially outside the desired range.
+
+% The user needs to select the following data directories and files:
+%   o gait events structure (.mat)
+%   o directory with IK results (.mot)
+%   o (un)comment the plot to visualize below
+
+%% -----------------------------------------------------------------------
+
 %% Choose IK Directory
 ikDIR = uigetdir("", "Choose IK results directory");
 

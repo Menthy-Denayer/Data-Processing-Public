@@ -33,8 +33,7 @@ function [mvcDictionary, flags] = processMVC(settings)
 % OpenSim MATLAB API (osimC3D)          | https://github.com/opensim-org/opensim-core/blob/main/Bindings/Java/Matlab/Utilities/osimC3D.m
 %
 %------------------------------------------------------------- TO DO's ------------------------------------------------------------
-% - Add input for bad EMGs
-% - Check output
+%
 %----------------------------------------------------------------------------------------------------------------------------------
 
 % Original Author: Couëdel Romane, Menthy Denayer

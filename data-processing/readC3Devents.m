@@ -1,4 +1,24 @@
 function events = readC3Devents(settings)
+%% readC3Devents - Reads heel strike events stored inside the C3D file
+% - only the last 2 heel strikes are saved, as these are on the force plates
+%
+%------------------------------------------- INPUTS -------------------------------------------
+% settings                              | struct                | Configuration structure with fields:
+%   settings.c3d_path_file              | string                | Full path to the input .c3d file
+%
+%------------------------------------------ OUTPUTS -------------------------------------------
+% events                                | struct                | Structure containing the heel strikes for each trial
+%
+%----------------------------------------------------------- REQUIREMENTS ---------------------------------------------------------
+% ezc3d toolbox                         | https://github.com/pyomeca/ezc3d
+%
+%----------------------------------------------------------------------------------------------------------------------------------
+
+% Original Author: Menthy Denayer
+% Date: 09/Oct/2025
+
+% Last Update: Menthy Denayer
+% Date: 09/Oct/2025 : Added description
 
 %% Load C3D File
 c3d = ezc3dRead(settings.c3d_path_file);
@@ -23,7 +43,7 @@ if isfield(c3d.parameters.EVENT,"LABELS")
     isRightStrike = contains(eventTypes,"Strike") & contains(eventSides,"Right");
     isLeftStrike = contains(eventTypes,"Strike") & contains(eventSides,"Left");
     isFootOff = contains(eventTypes,"Foot Off");
-    footOffSides = eventSides(isFootOff);
+    % footOffSides = eventSides(isFootOff);
     
     RheelStrike = sort(eventTimes(isRightStrike));
     LheelStrike = sort(eventTimes(isLeftStrike));

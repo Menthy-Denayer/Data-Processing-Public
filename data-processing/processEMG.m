@@ -18,7 +18,6 @@ function emgDataNorm = processEMG(emgDataRaw, emgLabels, FS, settings)
 % emgDataNorm                           | NxM double array      | Processed EMG data
 %
 %------------------------------------------------------------- TO DO's ------------------------------------------------------------
-% - Add option to normalize data to MVC tests
 %
 %----------------------------------------------------------------------------------------------------------------------------------
 

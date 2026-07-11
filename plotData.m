@@ -10,11 +10,11 @@ close all
 
 %% ---------------------------- User Settings -----------------------------
 % Choose Subject
-subjID = 1;                                                                 % choose one subject to plot
+subjID = 11;                                                                % choose one subject to plot
 
 % Choose Plot
 plotAll = true;                                                             % plot all subjects together
-plotIK = false;                                                             % plot the IK results
+plotIK = true;                                                              % plot the IK results
 plotID = false;                                                             % plot the ID results
 plotGRF = false;                                                            % plot the processed GRFs
 plotEMG = false;                                                            % plot the processed EMG signals

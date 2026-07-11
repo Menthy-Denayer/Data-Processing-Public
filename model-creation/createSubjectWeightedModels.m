@@ -12,7 +12,7 @@ close all
 
 %% ---------------------------- User Settings -----------------------------
 % Choose subject
-SUBJID = 1;
+SUBJID = 4;
 
 %% Import Libraries
 import org.opensim.modeling.*;
@@ -71,4 +71,4 @@ for mass = 1:5
 end
 
 %% Save Data
-save(fullfile(dataFileDir,dataFilePath),"data")
+% save(fullfile(dataFileDir,dataFilePath),"data")

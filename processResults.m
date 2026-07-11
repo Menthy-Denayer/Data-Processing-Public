@@ -645,6 +645,10 @@ if(exportFigure)
 end
 
 %% Save Data
+% load previous data
+data = load("MAT_normalizedData-vJul2026.mat");
+data = data.data;
+
 % save headers
 data.headers.kinematics = desKINColumns(2:end);
 data.headers.EMG = desEMGColumns(2:end);
@@ -700,7 +704,7 @@ data.("SUBJ" + SUBJID).speed.speedWeighted3kg = avgSpeedWeighted3kg;
 data.("SUBJ" + SUBJID).speed.speedWeighted4kg = avgSpeedWeighted4kg;
 data.("SUBJ" + SUBJID).speed.speedWeighted5kg = avgSpeedWeighted5kg;
 
-save("MAT_normalizedData-vNew.mat","data")
+save("MAT_normalizedData-vNew.mat","data");
 
 %% Functions
 % plot mean data with a 1-std gray band
@@ -757,22 +761,25 @@ function [procData,avgSpeed] = processData(fileName, desCol, LHeelStrike, RHeelS
     startIdxL = findTimeIdx(Time, startTimeL);
     endIdxL = findTimeIdx(Time, endTimeL);
 
+    tzIdx = find(desCol=="pelvis_tz");
     if(any(contains(desCol,"pelvis_tz")))
-        tzIdx = find(desCol=="pelvis_tz");
 
         % compute average speed
         deltaT = endTimeR - startTimeR;
         deltaX = Rawdata(startIdxR,tzIdx) - Rawdata(endIdxR, tzIdx);
         avgSpeed = deltaX/deltaT;
-        tzIdx = tzIdx + 1;
+        % tzIdx = tzIdx + 1;
     else
         avgSpeed = [];
-        tzIdx = 0;
+        % tzIdx = 0;
     end
 
     % resample data
-    procData(:,isRight) = averageGaitCycle(Time, Rawdata(:,isRight), [startIdxR, endIdxR], resampTime, tzIdx, false);
-    procData(:,isLeft) = averageGaitCycle(Time, Rawdata(:,isLeft), [startIdxL, endIdxL], resampTime, tzIdx, false);
+    procData(:,isRight) = averageGaitCycle(Time, Rawdata(:,isRight), [startIdxR, endIdxR], resampTime, [], false);
+    procData(:,isLeft) = averageGaitCycle(Time, Rawdata(:,isLeft), [startIdxL, endIdxL], resampTime, [], false);
+
+    % shift tz
+    procData(:,tzIdx) = procData(:,tzIdx) - procData(1,tzIdx);
 
     % correct COPz
     if(~isempty(BKfile))

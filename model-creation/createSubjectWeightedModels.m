@@ -12,7 +12,7 @@ close all
 
 %% ---------------------------- User Settings -----------------------------
 % Choose subject
-SUBJID = 4;
+SUBJID = 11;
 
 %% Import Libraries
 import org.opensim.modeling.*;

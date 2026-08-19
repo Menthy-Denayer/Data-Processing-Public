@@ -19,6 +19,7 @@ close all
 ezc3dDIR = uigetdir("","Choose ezc3d directory");
 
 %% Add Path to Repository
+addpath("C:\Users\medenaye\Documents\programs\OpenSim\4.5\Code\Matlab\Utilities")
 addpath("data-processing");
 addpath("data-processing\utilities");
 addpath(ezc3dDIR)
@@ -31,15 +32,15 @@ c3dFiles = string(dirInfo.name(ismember(fileExtensions, ".c3d")));
 Nfiles = length(c3dFiles);  
 
 %% Choose EMG Flags
-emgFlagsPath = uigetfile(".mat", "Choose EMG flags file");
+[emgFlagsFile, emgFlagsPath] = uigetfile(".mat", "Choose EMG flags file");
 
 %% Define General Settings
-results_directory = "SUBJ1";      
+results_directory = "SUBJ5";      
 settings.mot_results_dir = results_directory;
 settings.trc_results_dir = results_directory;
 settings.sto_results_dir = results_directory;
 settings.use_COP_as_moments_point = 1;
-settings.export_original = false;
+settings.export_original = true;
 
 %% Marker Settings
 % switching markers during processing if switched up during auto-labelling
@@ -83,29 +84,35 @@ settings.mvc_results_dir = results_directory;
 %% Create EMG Flag Structure
 % removing erroneous EMG data based on previous processing
 % load flags structure
-load(emgFlagsPath);
-flags = flags.SUBJ1;
+load(fullfile(emgFlagsPath,emgFlagsFile));
+flags = flags.SUBJ5;
 
 if(~isempty(flags))
     settings.emg_remove_flags = flags;
 end
 
 %% Process MVC Data
-[~,flags] = processMVC(settings);
+[~,flags,~] = processMVC(settings);
 
 if(~isempty(flags))
     settings.emg_remove_flags = flags;
 end
 
-settings.mvc_directory = "SUBJ1/MVCprocessed.mat";
+settings.mvc_directory = "SUBJ5/MVCprocessed.mat";
 
 %% Check Static Trial
+load("grfStaticCorrection-13082026");
+
 staticTrials = c3dFiles(contains(c3dFiles,"static","IgnoreCase",true));
 settings.grf_static_trial = fullfile(c3dDir, staticTrials(1));
 settings.grf_correct_force_plate_idx = 3;
 settings.grf_scale = computeGRFcorrection(settings);
 
+grfCorr.SUBJ5 = settings.grf_scale;
+save("grfStaticCorrection-13082026","grfCorr");
+
 %% Process Data
+
 % Loop over .c3d files
 f = waitbar(0, 'Processing data...');
 for fileIdx = 1:Nfiles
@@ -135,4 +142,4 @@ end
 close(f)
 
 %% Save Events Structure
-save(results_directory + "/gaitEvents.mat","events")
+% save(results_directory + "/gaitEvents.mat","events")

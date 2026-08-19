@@ -145,6 +145,7 @@ GRFdataTot = NaN(Ndata, NgrfCol-1, NgrfFiles);                              % ti
 IDdataTot = NaN(Ndata, NidCol-1, NkinFiles);                                % time data excluded
 POWdataTot = NaN(Ndata, NpowCol-1, NpowerFiles);                            % time data excluded 
 avgSpeed = NaN(NkinFiles,1);
+gaitSide = strings(NkinFiles,1);
 
 f = waitbar(0, 'Processing data...');
 for fileIdx = 1:NkinFiles
@@ -157,12 +158,12 @@ for fileIdx = 1:NkinFiles
 
     if(~isempty(RHeelStrike))
 
-        if(RHeelStrike(1) < LHeelStrike(1))                                 % last heel strikes are on the left side
-            FGHeelStrike = LHeelStrike;
-            switchData = false;
-        else                                                                % last heel strikes are on the right side
-            FGHeelStrike = RHeelStrike;             
+        [FGHeelStrike, gaitSide(fileIdx)] = extractTimeRange(fullfile(grfDir, grfFiles(fileIdx)), gaitEvents.events.(expName));
+
+        if(gaitSide(fileIdx) == "r")
             switchData = true;
+        else
+            switchData = false;
         end
 
         % IK results
@@ -297,6 +298,14 @@ avgSpeedWeighted2kg = avgSpeed(weightedWalking2kgIdx);
 avgSpeedWeighted3kg = avgSpeed(weightedWalking3kgIdx);
 avgSpeedWeighted4kg = avgSpeed(weightedWalking4kgIdx);
 avgSpeedWeighted5kg = avgSpeed(weightedWalking5kgIdx);
+
+% split gait side into separate arrays
+gaitSideNormal = gaitSide(normalWalkingIdx);
+gaitSideWeighted1kg = gaitSide(weightedWalking1kgIdx);
+gaitSideWeighted2kg = gaitSide(weightedWalking2kgIdx);
+gaitSideWeighted3kg = gaitSide(weightedWalking3kgIdx);
+gaitSideWeighted4kg = gaitSide(weightedWalking4kgIdx);
+gaitSideWeighted5kg = gaitSide(weightedWalking5kgIdx);
 
 %% Compute Mean & STD
 % mean & std kinematics 
@@ -704,6 +713,14 @@ data.("SUBJ" + SUBJID).speed.speedWeighted3kg = avgSpeedWeighted3kg;
 data.("SUBJ" + SUBJID).speed.speedWeighted4kg = avgSpeedWeighted4kg;
 data.("SUBJ" + SUBJID).speed.speedWeighted5kg = avgSpeedWeighted5kg;
 
+% save sides
+data.("SUBJ" + SUBJID).gaitSide.gaitSideNormal = gaitSideNormal;
+data.("SUBJ" + SUBJID).gaitSide.gaitSideWeighted1kg = gaitSideWeighted1kg;
+data.("SUBJ" + SUBJID).gaitSide.gaitSideWeighted2kg = gaitSideWeighted2kg;
+data.("SUBJ" + SUBJID).gaitSide.gaitSideWeighted3kg = gaitSideWeighted3kg;
+data.("SUBJ" + SUBJID).gaitSide.gaitSideWeighted4kg = gaitSideWeighted4kg;
+data.("SUBJ" + SUBJID).gaitSide.gaitSideWeighted5kg = gaitSideWeighted5kg;
+
 save("MAT_normalizedData-vNew.mat","data");
 
 %% Functions
@@ -836,4 +853,20 @@ function normCOP = normalizeCOP(data, BKdata)
     end
 
     normCOP(:,2) = normCOP(:,2) * -1;
+end
+
+% extract time range 
+% heel strike on second force plate to just before heel strike of same foot
+function [time_range, side] = extractTimeRange(grf_file, events)
+% import grf data
+GRFstruct = importdata(grf_file);
+GRFcolumns = GRFstruct.colheaders;
+secondForcePlateLabel = GRFcolumns(end);
+if(contains(secondForcePlateLabel,"_l_"))
+    time_range = events.LHeelStrike;
+    side = "l";
+else
+    time_range = events.RHeelStrike;
+    side = "r";
+end
 end

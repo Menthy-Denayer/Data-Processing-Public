@@ -129,7 +129,7 @@ if isfield(settings, "mvc_directory")
         MVCsettings = settings;
         MVCsettings.emg_normalize = false;
         disp(['Processing MVC files inside of: ' char(settings.mvc_directory)])
-        [settings.emg_mvc_dictionary,~] = processMVC(MVCsettings);
+        [settings.emg_mvc_dictionary,~,~] = processMVC(MVCsettings);
     else
         disp(['Using MVC results of: ' char(settings.mvc_directory)])
         MVCresultsStruct = load(settings.mvc_directory);

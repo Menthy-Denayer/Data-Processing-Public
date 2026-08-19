@@ -10,19 +10,19 @@ close all
 
 %% ---------------------------- User Settings -----------------------------
 % Choose Subject
-subjID = 11;                                                                % choose one subject to plot
+subjID = 1;                                                                % choose one subject to plot
 
 % Choose Plot
 plotAll = true;                                                             % plot all subjects together
 plotIK = true;                                                              % plot the IK results
-plotID = false;                                                             % plot the ID results
-plotGRF = false;                                                            % plot the processed GRFs
-plotEMG = false;                                                            % plot the processed EMG signals
-plotPOW = false;                                                            % plot the computed joint powers
-plotSpeed = false;                                                          % plot the speed
+plotID = true;                                                             % plot the ID results
+plotGRF = true;                                                            % plot the processed GRFs
+plotEMG = true;                                                            % plot the processed EMG signals
+plotPOW = true;                                                            % plot the computed joint powers
+plotSpeed = true;                                                          % plot the speed
 
 % Export figures
-exportFigure = false;                                                       % save the figures
+exportFigure = true;                                                       % save the figures
 fileType = "png";
 
 %% ------------------------------------------------------------------------

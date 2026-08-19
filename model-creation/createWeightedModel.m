@@ -49,10 +49,11 @@ newModel.addBody(weight_body_right)
 weight_body_left = Body('weights_left', mass, Vec3(0), Inertia(Vec3(inertia_l(2),inertia_l(3),inertia_l(1))));
 newModel.addBody(weight_body_left)
 
-% Joints, weights added to underside of tibia 
-weight_joint_right = WeldJoint('fixed',bodies.get("tibia_r"), Vec3(x_l,y_l,0), Vec3(0,0,0), weight_body_right, Vec3(0), Vec3(0)); % Fixed in space
+% Joints, weights added to underside of tibia,
+% small correction: left/right location was changed, should not have big implications as usually similar values
+weight_joint_right = WeldJoint('fixed',bodies.get("tibia_r"), Vec3(x_r,y_r,0), Vec3(0,0,0), weight_body_right, Vec3(0), Vec3(0)); % Fixed in space
 newModel.addJoint(weight_joint_right);
-weight_joint_left = WeldJoint('fixed',bodies.get("tibia_l"), Vec3(x_r,y_r,0), Vec3(0,0,0), weight_body_left, Vec3(0), Vec3(0)); % Fixed in space
+weight_joint_left = WeldJoint('fixed',bodies.get("tibia_l"), Vec3(x_l,y_l,0), Vec3(0,0,0), weight_body_left, Vec3(0), Vec3(0)); % Fixed in space
 newModel.addJoint(weight_joint_left);
 
 % Geometry (visual), comment: important to do separate meshes for left/right

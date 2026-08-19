@@ -1,4 +1,4 @@
-function [mvcDictionary, flags] = processMVC(settings)
+function [mvcDictionary, flags, mvcFilesDict] = processMVC(settings)
 %% processMVC - Extracts and processes MVC EMG data & exports to .sto file
 % - Only channels with 'Electric' in their name are considered EMG by default.
 % - Channels with 'button', 'load', or 'sync' are excluded (to avoid non-muscular data).
@@ -27,6 +27,8 @@ function [mvcDictionary, flags] = processMVC(settings)
 %
 %------------------------------------------------------------- OUTPUTS ------------------------------------------------------------
 % mvcDictionary                         | dictionary            | Dictionary of muscles & maximal values found across MVC trials
+% flags                                 | struct                | Structure containing possible bad EMG signal flags
+% mvcFiles                              | dictionary            | Dictionary of muscles & mvc files used
 %
 %----------------------------------------------------------- REQUIREMENTS ---------------------------------------------------------
 % ezc3d toolbox                         | https://github.com/pyomeca/ezc3d
@@ -40,7 +42,7 @@ function [mvcDictionary, flags] = processMVC(settings)
 % Date: 19/May/2025
 
 % Last Update: Menthy Denayer
-% Date: 24/May/2025 : update to structure & info
+% Date: 13/Aug/2026 : added save for MVC files
 
 %% Import OpenSim Java Libraries
 import org.opensim.modeling.*
@@ -172,10 +174,13 @@ close(f)
 
 %% Create Dictionary
 mvcDictionary = dictionary(muscleNames, mvcActivations);
+mvcFilesDict = dictionary(muscleNames, mvcTests);
 
 %% Save Results
 MVCfileName = fullfile(settings.mvc_results_dir, "MVCprocessed.mat");
+MVCfileName2 = fullfile(settings.mvc_results_dir, "MVCfiles.mat");
 save(MVCfileName, "mvcDictionary");
+save(MVCfileName2, "mvcFilesDict");
 
 %% Log Results
 for muscleIdx = 1:Nmuscles

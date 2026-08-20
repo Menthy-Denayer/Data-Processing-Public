@@ -76,8 +76,8 @@ save(fullfile(IKerrDir, IKerrFile),"IKerr")
 % matrixheadersMAX = repmat("MAX ",1,7) + ["0 kg", "1 kg", "2 kg", "3 kg", "4 kg", "5 kg", "scale"]; 
 matrixheaders = ["0 kg", "1 kg", "2 kg", "3 kg", "4 kg", "5 kg", "scale"]; 
 
-print_struct_latex(IKerr, "SUBJ", headers(2), matrixheaders, '%.2f')
-print_struct_latex(IKerr, "SUBJ", headers(3), matrixheaders, '%.2f')
+print_struct_latex(IKerr, "SUBJ", headers(2), matrixheaders, '%.3f')
+print_struct_latex(IKerr, "SUBJ", headers(3), matrixheaders, '%.3f')
 
 %% Helper Function
 % Function to split the file names into categories for easier comparison
@@ -150,8 +150,10 @@ for i = 1:Nfields
     end
 end
 
+StdMatrix(StdMatrix == 0) = NaN;
+
 % Print Matrix
-print_matrix_latex(round(MeanMatrix,2), round(StdMatrix,2), matrixheaders, strrep(fieldNames,"_"," "), notation)
+print_matrix_latex(round(MeanMatrix,3), round(StdMatrix,3), matrixheaders, strrep(strrep(fieldNames,"_"," "),"SUBJ","S"), notation)
 end
 
 % Prints the data in the command window in Latex table format
@@ -181,11 +183,11 @@ for i = 1:Nrow+1
             fprintf('\\textbf{' + string(colheaders(j-1)) + '} ' + token)
         elseif(i > 1 && j == 1)
             fprintf('\\textbf{' + string(rownames(i-1)) + '} ' + token)
-        elseif(matrix(i-1,j-1) == i && ~isempty(std_matrix))
+        elseif(matrix(i-1,j-1) == i && ~isempty(std_matrix) && ~isnan(std_matrix(i-1,j-1)))
             fprintf(['\\textbf{' notation '$\\pm$ ' notation '} ' token], matrix(i-1,j-1), std_matrix(i-1,j-1))
         elseif(matrix(i-1,j-1) == i)
             fprintf(['\\textbf{' notation '} ' token], matrix(i-1,j-1))
-        elseif(~isempty(std_matrix))
+        elseif(~isempty(std_matrix) && ~isnan(std_matrix(i-1,j-1)))
             fprintf([notation '$\\pm$ ' notation ' ' token], matrix(i-1,j-1), std_matrix(i-1,j-1))
         else
             fprintf([notation ' ' token], matrix(i-1,j-1))

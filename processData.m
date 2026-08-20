@@ -19,7 +19,8 @@ close all
 ezc3dDIR = uigetdir("","Choose ezc3d directory");
 
 %% Add Path to Repository
-addpath("C:\Users\medenaye\Documents\programs\OpenSim\4.5\Code\Matlab\Utilities")
+% You might need to add the following path to the OpenSim C3D utilities:
+% addpath(<you directory>\OpenSim\4.5\Code\Matlab\Utilities")
 addpath("data-processing");
 addpath("data-processing\utilities");
 addpath(ezc3dDIR)

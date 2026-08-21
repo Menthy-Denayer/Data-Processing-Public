@@ -27,8 +27,8 @@ function [mot_file, forceTableProcessed] = C3DtoMOT(settings, OpenSimC3D)
 % Original Author: Couëdel Romane
 % Date: 19/May/2025
 
-% Last Update: Romane Couëdel
-% Date: 26/May/2025 : Adjust index of force 
+% Last Update: Menthy Denayer
+% Date: 20/Aug/2026 : Fixed accidental time vector filtering
 
 %% Import OpenSim Java Libraries
 import org.opensim.modeling.*
@@ -164,7 +164,7 @@ if(settings.forces_lowpassFilter)
     end
     
      if isfield(settings,"forces_lowpassFilterOrder")
-        lowpassSettings(1).forces_lowpassFilterOrder = settings.forces_lowpassFilterOrder;
+        lowpassSettings(1).lowpassFilterOrder = settings.forces_lowpassFilterOrder;
     end
 
     FS = OpenSimC3D.getRate_force();                                        % get sampling frequency
@@ -172,9 +172,11 @@ if(settings.forces_lowpassFilter)
     % loop over force data in structure to lowpass filter
     for forceIdx = 1:length(forceLabelsFiltered)
         forceLabel = forceLabelsFiltered(forceIdx);
-        forceData = forceStructLowpass.(forceLabel);
-        forceDataLowpass = lowpassFilter(forceData, FS, lowpassSettings);   % lowpass filter data
-        forceStructLowpass.(forceLabel) = forceDataLowpass;
+        if(~contains(forceLabel,"time"))
+            forceData = forceStructLowpass.(forceLabel);
+            forceDataLowpass = lowpassFilter(forceData, FS, lowpassSettings);   % lowpass filter data
+            forceStructLowpass.(forceLabel) = forceDataLowpass;
+        end
     end
 end
 

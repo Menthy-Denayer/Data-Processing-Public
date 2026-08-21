@@ -34,7 +34,7 @@ function [trc_file, markerTableProcessed] = C3DtoTRC(settings, OpenSimC3D)
 % Date: 19/May/2025
 
 % Last Update: Menthy Denayer
-% Date: 28/June/2025 : Added max gap fil threshold to stop markers from staying in one place for long time
+% Date: 20/08/2026 : Fixed accidental time vector filtering
 
 %% Import OpenSim Java Libraries
 import org.opensim.modeling.*
@@ -113,7 +113,7 @@ if(settings.markers_lowpassFilter)
     end
     
     if isfield(settings,"forces_lowpassFilterOrder")
-        lowpassSettings(1).markers_lowpassFilterOrder = settings.markers_lowpassFilterOrder;
+        lowpassSettings(1).lowpassFilterOrder = settings.markers_lowpassFilterOrder;
     end
 
     FS = OpenSimC3D.getRate_marker();                                       % get sampling frequency
@@ -121,9 +121,11 @@ if(settings.markers_lowpassFilter)
     % loop over force data in structure to lowpass filter
     for markerIdx = 1:length(markerLabelsFiltered)
         markerLabel = markerLabelsFiltered(markerIdx);
-        markerData = markerStructLowpass.(markerLabel);
-        markerDataLowpass = lowpassFilter(markerData, FS, lowpassSettings); % lowpass filter data
-        markerStructLowpass.(markerLabel) = markerDataLowpass;
+        if(~contains(markerLabel,"time"))
+            markerData = markerStructLowpass.(markerLabel);
+            markerDataLowpass = lowpassFilter(markerData, FS, lowpassSettings); % lowpass filter data
+            markerStructLowpass.(markerLabel) = markerDataLowpass;
+        end
     end
 end
 

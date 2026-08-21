@@ -36,7 +36,7 @@ Nfiles = length(c3dFiles);
 [emgFlagsFile, emgFlagsPath] = uigetfile(".mat", "Choose EMG flags file");
 
 %% Define General Settings
-results_directory = "SUBJ5";      
+results_directory = "SUBJ1";      
 settings.mot_results_dir = results_directory;
 settings.trc_results_dir = results_directory;
 settings.sto_results_dir = results_directory;
@@ -86,7 +86,7 @@ settings.mvc_results_dir = results_directory;
 % removing erroneous EMG data based on previous processing
 % load flags structure
 load(fullfile(emgFlagsPath,emgFlagsFile));
-flags = flags.SUBJ5;
+flags = flags.SUBJ1;
 
 if(~isempty(flags))
     settings.emg_remove_flags = flags;
@@ -99,7 +99,7 @@ if(~isempty(flags))
     settings.emg_remove_flags = flags;
 end
 
-settings.mvc_directory = "SUBJ5/MVCprocessed.mat";
+settings.mvc_directory = "SUBJ1/MVCprocessed.mat";
 
 %% Check Static Trial
 load("grfStaticCorrection-13082026");
@@ -109,7 +109,7 @@ settings.grf_static_trial = fullfile(c3dDir, staticTrials(1));
 settings.grf_correct_force_plate_idx = 3;
 settings.grf_scale = computeGRFcorrection(settings);
 
-grfCorr.SUBJ5 = settings.grf_scale;
+grfCorr.SUBJ1 = settings.grf_scale;
 save("grfStaticCorrection-13082026","grfCorr");
 
 %% Process Data

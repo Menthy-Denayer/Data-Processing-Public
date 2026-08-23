@@ -76,8 +76,8 @@ save(fullfile(IKerrDir, IKerrFile),"IKerr")
 % matrixheadersMAX = repmat("MAX ",1,7) + ["0 kg", "1 kg", "2 kg", "3 kg", "4 kg", "5 kg", "scale"]; 
 matrixheaders = ["0 kg", "1 kg", "2 kg", "3 kg", "4 kg", "5 kg", "scale"]; 
 
-print_struct_latex(IKerr, "SUBJ", headers(2), matrixheaders, '%.3f')
-print_struct_latex(IKerr, "SUBJ", headers(3), matrixheaders, '%.3f')
+print_struct_latex(IKerr, "SUBJ", headers(2), matrixheaders, '%.2f')
+print_struct_latex(IKerr, "SUBJ", headers(3), matrixheaders, '%.2f')
 
 %% Helper Function
 % Function to split the file names into categories for easier comparison
@@ -144,7 +144,7 @@ MeanMatrix = zeros(Nfields, Ncases);
 StdMatrix = zeros(Nfields, Ncases);
 for i = 1:Nfields
     for j = 1:Nsubfields
-        errors = struct.(fieldNames(i)).(subfieldNames(j));
+        errors = struct.(fieldNames(i)).(subfieldNames(j))*1e2;             % convert to cm
         MeanMatrix(i,j) = mean(errors(:,isHeader),1);
         StdMatrix(i,j) = std(errors(:,isHeader),[],1);
     end
@@ -153,7 +153,7 @@ end
 StdMatrix(StdMatrix == 0) = NaN;
 
 % Print Matrix
-print_matrix_latex(round(MeanMatrix,3), round(StdMatrix,3), matrixheaders, strrep(strrep(fieldNames,"_"," "),"SUBJ","S"), notation)
+print_matrix_latex(round(MeanMatrix,2), round(StdMatrix,2), matrixheaders, strrep(strrep(fieldNames,"_"," "),"SUBJ","S"), notation)
 end
 
 % Prints the data in the command window in Latex table format

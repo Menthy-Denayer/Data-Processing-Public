@@ -26,8 +26,8 @@ To run the code, you need to install the libraries and toolboxes below. You can 
 - [Matlab Robotics System Toolbox](https://nl.mathworks.com/products/robotics.html)
 
 # Citation
-The dataset linked to this repository can be found [here](coming soon).
+The dataset linked to this repository can be found [here](https://doi.org/10.6084/m9.figshare.30316372).
 
-If you use this repository, please cite the following paper: (currently submitted in Nature Data):
+If you use this repository, please cite the following paper:
 
-Denayer, M., Turcksin, T., De Pauw, K. & Verstraten, T. (2025). A Full-body Motion Capture Dataset for Bilateral Weighted Shank Walking. _journal name_. _DOI Link_
+Denayer, M., Turcksin, T., De Pauw, K., & Verstraten, T. (2026). A Full-body Motion Capture Dataset for Bilateral Weighted Shank Walking. Scientific Data. https://doi.org/10.1038/s41597-026-08393-8

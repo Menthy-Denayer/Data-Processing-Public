@@ -60,6 +60,7 @@ mot_file_original = fullfile(settings.mot_results_dir, strcat(filename, '_forces
 %% Load the C3D file and rotate data to match OpenSim's coordinate system
 c3d = osimC3D(c3d_path_file, use_COP_as_moments_point);
 c3d.rotateData('x', -90);                                                   % Rotate around X-axis
+% c3d.rotateData('y', -90);
 
 %% Export marker data to initial TRC files using OpenSim API
 if isfield(settings,"export_original")

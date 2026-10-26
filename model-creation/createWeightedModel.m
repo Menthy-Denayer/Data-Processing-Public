@@ -1,4 +1,4 @@
-function [x_l,y_l,inertia_l,x_r,y_r,inertia_r] = createWeightedModel(gaitModel, mass, height, width, thickness, descirc, desloc, markerRKNEtib, outputDir)
+function [x_l,y_l,inertia_l,x_r,y_r,inertia_r] = createWeightedModel(gaitModel, mass, height, width, thickness, descirc, desloc, markerRKNEtib, outputDir, useMean)
 %% createWeightedModel - Creates a model with a weight added to the shank
 %--------------------------------------------INPUTS--------------------------------------------
 % gaitModel                             | OpenSim model         | OpenSim model to customize
@@ -27,6 +27,15 @@ function [x_l,y_l,inertia_l,x_r,y_r,inertia_r] = createWeightedModel(gaitModel, 
 
 %% Import Libraries
 import org.opensim.modeling.*;
+
+%% Take Mean
+if(useMean)
+    avgcirc = mean(descirc);
+    descirc = [avgcirc avgcirc];
+
+    avgloc = mean(desloc);
+    desloc = [avgloc avgloc];
+end
 
 %% com distance
 [x_l, inertia_l] = computeWeightLocations(mass, descirc(1), height, width, thickness); x_l = x_l(2);

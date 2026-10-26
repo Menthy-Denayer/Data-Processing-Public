@@ -12,7 +12,8 @@ close all
 
 %% ---------------------------- User Settings -----------------------------
 % Choose subject
-SUBJID = 14;
+SUBJID = 11;
+useMean = true;
 
 %% Import Libraries
 import org.opensim.modeling.*;
@@ -58,7 +59,7 @@ for mass = 1:5
     desloc = data.("SUBJ" + SUBJID).char.weight_loc.("loc" + mass + "kg")*0.01;
 
     % create weighted model
-    [x_l,y_l,inertia_l,x_r,y_r,inertia_r] = createWeightedModel(gaitModel,mass,heightList(mass),widthList(mass),thickList(mass),descirc,desloc,markerRKNEtib, outputDir);
+    [x_l,y_l,inertia_l,x_r,y_r,inertia_r] = createWeightedModel(gaitModel,mass,heightList(mass),widthList(mass),thickList(mass),descirc,desloc,markerRKNEtib, outputDir, useMean);
 
     % save weight info
     data.("SUBJ" + SUBJID).char.weight_pos.("pos_l_" + mass + "kg") = [x_l, y_l];
